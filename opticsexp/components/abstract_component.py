@@ -14,6 +14,14 @@ class AbstractComponent:
         self.pivot: NDArray[np.float64] = np.array([0., 0.]) # (x, y) coordinate with pivot
         self.parameter: NDArray[np.float64] = np.array([0., 0.]) # (r, \theta) parameters 
         self.optical_axis_height = 0.5 * inch
+        self.optical_axis: NDArray[np.float64] = np.array(
+            [
+                [0., 0., self.optical_axis_height], 
+                [1., 0., self.optical_axis_height], 
+                [0., 1., self.optical_axis_height], 
+                [0., 0., self.optical_axis_height + 1.]
+                ]
+                )
         self.pivot_axis: NDArray[np.float64] = np.array(
             [
                 [0., 0., self.optical_axis_height], 
@@ -31,14 +39,21 @@ class AbstractComponent:
             y (float): pivot y coordinate
         """
         self.pivot = np.array([x, y])
-        self.pivot_axis: NDArray[np.float64] = np.array([[x, y, 0.], [x+1., y, 0.], [x, y, 0.], [x, y, 0.]])
+        self.pivot_axis: NDArray[np.float64] = np.array(
+            [
+                [x, y, self.optical_axis_height], 
+                [x+1., y, self.optical_axis_height], 
+                [x, y, self.optical_axis_height], 
+                [x, y, self.optical_axis_height]
+                ]
+                )
 
     def set_parameter(self, r: float, theta: float):
         """Setup parameter values (r, theta)
 
         Args:
             r (float): moving distance 
-            theta (float): tilting angle
+            theta (float): tilting angle in degrees
         """
-        self.parameter = np.array([r, theta])
+        self.parameter = np.array([r, np.deg2rad(theta)])
 
