@@ -1,6 +1,7 @@
-from .rot_symmetric_surface import RotSymmetricSurface
+from .abstract_surface import AbstractSurface
+from .aperture import RectangularAperture
 
-class SphericalSurface(RotSymmetricSurface):
+class CylindricalSurface(AbstractSurface):
     def __init__(self):
-        super().__init__()
+        super().__init__(RectangularAperture())
         
