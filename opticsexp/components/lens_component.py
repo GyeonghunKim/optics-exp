@@ -39,7 +39,6 @@ class LensComponent(AbstractComponent):
         self.surface_1_distance = surface_1_distance
         self.surface_2_distance = surface_2_distance
 
-
     def C0_to_C1(self, C0: NDArray):
         """ Change optical axis coordinate to surface 1 coordinate
 
